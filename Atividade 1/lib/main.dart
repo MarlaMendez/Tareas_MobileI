@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -26,21 +33,33 @@ class MyApp extends StatelessWidget {
                     "https://paradepets.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkxMzY1Nzg5MjI1NTI2ODE3/small-cat-breeds-1-jpg.jpg"),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(18.0),
+             Padding(
+              padding: const EdgeInsets.all(18.0),
               child: TextField(
-                decoration: InputDecoration(
+                 controller: _usernameController,
+                decoration: const InputDecoration(
                   labelText: "Usuario",
                   border: OutlineInputBorder(),
                 ),
               ),
             ),
-           const Padding(
-              padding: EdgeInsets.all(18.0),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
               child: TextField(
+                controller: _passwordController,
+                obscureText: _obscureText, 
                 decoration: InputDecoration(
                   labelText: "Senha",
-                  border: OutlineInputBorder(),
+                  suffixIcon: IconButton (
+                    icon: Icon(_obscureText ? Icons.visibility_off : Icons.visibility,
+                    ),
+                    onPressed: () {
+                       setState(() {
+                        _obscureText = !_obscureText;
+                       });
+                    },
+                  ),
+                  border: const OutlineInputBorder(),
                 ),
               ),
             ),
