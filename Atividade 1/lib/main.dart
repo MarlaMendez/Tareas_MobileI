@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/App1.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -24,7 +25,7 @@ class _MyAppState extends State<MyApp> {
           title: const Text("Atividade 1"),
           backgroundColor: const Color.fromARGB(255, 194, 91, 125),
         ),
-        body:  Column(
+        body: Column(
           children: [
             const Center(
               child: CircleAvatar(
@@ -33,10 +34,10 @@ class _MyAppState extends State<MyApp> {
                     "https://paradepets.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkxMzY1Nzg5MjI1NTI2ODE3/small-cat-breeds-1-jpg.jpg"),
               ),
             ),
-             Padding(
+            Padding(
               padding: const EdgeInsets.all(18.0),
               child: TextField(
-                 controller: _usernameController,
+                controller: _usernameController,
                 decoration: const InputDecoration(
                   labelText: "Usuario",
                   border: OutlineInputBorder(),
@@ -47,25 +48,43 @@ class _MyAppState extends State<MyApp> {
               padding: const EdgeInsets.all(18.0),
               child: TextField(
                 controller: _passwordController,
-                obscureText: _obscureText, 
+                obscureText: _obscureText,
                 decoration: InputDecoration(
                   labelText: "Senha",
-                  suffixIcon: IconButton (
-                    icon: Icon(_obscureText ? Icons.visibility_off : Icons.visibility,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility_off : Icons.visibility,
                     ),
                     onPressed: () {
-                       setState(() {
+                      setState(() {
                         _obscureText = !_obscureText;
-                       });
+                      });
                     },
                   ),
                   border: const OutlineInputBorder(),
                 ),
               ),
             ),
-           const SizedBox(height: 18.0),
+            const SizedBox(height: 18.0),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                if (_usernameController.text.isNotEmpty &&
+                    _passwordController.text.isNotEmpty) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => App1(
+                        username: _usernameController.text,
+                      ),
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Porfavor completar todos los campos!"),
+                    backgroundColor: Colors.pink,
+                  ));
+                }
+              },
               child: const Text("Login"),
             )
           ],
