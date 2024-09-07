@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class App1 extends StatelessWidget {
@@ -7,7 +8,7 @@ class App1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var username;
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('App1'),

@@ -16,6 +16,13 @@ class _MyAppState extends State<MyApp> {
   bool _obscureText = true;
 
   @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -79,14 +86,16 @@ class _MyAppState extends State<MyApp> {
                     ),
                   );
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text("Porfavor completar todos los campos!"),
-                    backgroundColor: Colors.pink,
-                  ));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Porfavor completar todos los campos!"),
+                      backgroundColor: Colors.pink,
+                    ),
+                  );
                 }
               },
               child: const Text("Login"),
-            )
+            ),
           ],
         ),
       ),
