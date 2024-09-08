@@ -16,13 +16,6 @@ class _MyAppState extends State<MyApp> {
   bool _obscureText = true;
 
   @override
-  void dispose() {
-    _usernameController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -73,28 +66,33 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             const SizedBox(height: 18.0),
-            ElevatedButton(
-              onPressed: () {
-                if (_usernameController.text.isNotEmpty &&
-                    _passwordController.text.isNotEmpty) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => App1(
-                        username: _usernameController.text,
-                      ),
-                    ),
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Porfavor completar todos los campos!"),
-                      backgroundColor: Colors.pink,
-                    ),
-                  );
-                }
+            Builder(
+              builder: (context) {
+                return ElevatedButton(
+                  onPressed: () {
+                    if (_usernameController.text.isNotEmpty &&
+                        _passwordController.text.isNotEmpty) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => App1(
+                            username: _usernameController.text,
+                          ),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content:
+                              Text("Por favor completar todos los campos!"),
+                          backgroundColor: Colors.pink,
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text("Login"),
+                );
               },
-              child: const Text("Login"),
             ),
           ],
         ),

@@ -12,6 +12,7 @@ class App1 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('App1'),
+        backgroundColor: const Color.fromARGB(255, 194, 91, 125),
       ),
       body: Center(
         child: Text(
